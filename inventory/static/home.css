@@ -6,10 +6,11 @@ body {
 
 .sidebar {
     width: 6%;
-    background-color: #014404;
+    background-color: #008163;
     color: rgb(255, 255, 255);
-    height: 100vh;
-    padding: 30px 50px 50px 20px;
+    height: auto;
+    padding: 30px 60px 50px 20px;
+    text-align: center;
 }
 
 .sidebar .logo {
@@ -53,7 +54,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #2ECC71;
+    background-color: #EE2526;
     transition: width 0.3s ease;
 }
 
@@ -75,14 +76,14 @@ body {
 }
 
 .sidebar nav ul li:hover a i {
-    color: #2ECC71;
+    color: #EE2526;;
 }
 
 
 
 .main {
     flex: 1;
-    padding: 20px;
+    padding: 10px 40px 10px 40px;
     background-color: #F4F6F8;
 }
 
@@ -91,19 +92,46 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    background: linear-gradient(
+        to bottom,
+        #F4811F 0%, 
+        #F4811F 28%, 
+        transparent 30%, 
+        transparent 33%, 
+        #008163 35%, 
+        #008163 66%, 
+        transparent 68%, 
+        transparent 71%, 
+        #EE2526 73%, 
+        #EE2526 100%
+    );
+    padding: 20px;
+    color: #ffffff;
 }
 
+
+
+
 .search-bar input {
-    width: 300px;
+    width: 200px;
     padding: 8px;
+    border: none;
+    color: #fff;
+}
+
+.title {
+    margin-left: 20px;
 }
 
 .user-profile {
     display: flex;
     gap: 15px;
     align-items: center;
+    font-size: 18px;
+    margin-right: 20px;
 }
 
+/* Overview Section */
 .overview {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -111,19 +139,56 @@ body {
     margin-bottom: 20px;
 }
 
+/* Individual Cards */
 .card {
     background: white;
     padding: 20px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
+/* Card Title */
+.card h4 {
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Card Value (Number or Metric) */
+.card-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #008163;
+}
+
+/* Card Subtext */
+.card small {
+    font-size: 14px;
+    color: #7D7D7D;
+}
+
+.card i {
+    font-size: 32px;
+    color: #EE2526;
+    margin-bottom: 10px;
+}
+
+
+
 
 .charts-tables {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    justify-content: space-between;
+    margin-top: 30px;
 }
+
 
 .table, .chart {
     background: white;
@@ -132,9 +197,29 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-table {
+.chart {
+    position: relative;
     width: 100%;
-    border-collapse: collapse;
+    max-width: 550px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.chart canvas {
+    height: 300px;
+    margin-top: 10px;
+}
+
+
+.table {
+    flex: 1 1 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 table th, table td {

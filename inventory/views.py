@@ -11,8 +11,8 @@ def home(request):
     return render(request, 'UI/home.html', {'categories': categories})
 
 def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'UI/product_list.html', {'products': products})
+    categories = Category.objects.all()
+    return render(request, 'UI/product_list.html', {'categories': categories})
 
 def stock_transactions(request):
     transactions = StockTransaction.objects.all()

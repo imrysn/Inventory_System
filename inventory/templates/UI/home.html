@@ -27,7 +27,7 @@
     <div class="main">
         <!-- Header -->
         <header class="main-header">
-            <h2>ShelfTrack</h2>
+            <h2 class="title">ShelfTrack</h2>
             <div class="search-bar">
                 <input type="text" placeholder="Search...">
             </div>
@@ -39,17 +39,39 @@
 
         <!-- Overview Section -->
         <section class="overview">
-            <div class="card">Revenue: +30,000</div>
-            <div class="card">Sales Return: +30,000</div>
-            <div class="card">Purchase: +30,000</div>
-            <div class="card">Income: +30,000</div>
+            <div class="card">
+                <h4>Total Products</h4>
+                <i class="fas fa-boxes"></i>
+                <p class="card-value">250 Items</p>
+                <small>Products currently in stock.</small>
+            </div>
+            <div class="card">
+                <h4>Pending Orders</h4>
+                <i class="fas fa-receipt"></i>
+                <p class="card-value">10 Orders</p>
+                <small>Orders waiting for approval.</small>
+            </div>
+            <div class="card">
+                <h4>Total Suppliers</h4>
+                <i class="fas fa-truck"></i>
+                <p class="card-value">8</p>
+                <small>Active suppliers providing stock.</small>
+            </div>
+            <div class="card">
+                <h4>Out of Stock</h4>
+                <i class="fas fa-exclamation-circle"></i>
+                <p class="card-value">5 Items</p>
+                <small>Items currently unavailable.</small>
+            </div>
         </section>
+        
+        
 
         <!-- Charts and Tables -->
         <section class="charts-tables">
             <div class="chart">
-                <h3>Revenue Chart</h3>
-                <canvas id="revenueChart"></canvas>
+                <h3>Stock Distribution</h3>
+                <canvas id="stockDistributionChart"></canvas>
             </div>
             <div class="chart">
                 <h3>Top Selling Products</h3>
@@ -81,4 +103,7 @@
         </section>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../static/charts.js"></script>
+
 </html>
