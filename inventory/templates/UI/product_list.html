@@ -52,7 +52,7 @@
                              <div class="product-info">
                                  <h3>{{ product.name }}</h3>
                                  <p>{{ product.category.name }}</p>
-                                 <div class="price">${{ product.price }}</div>
+                                 <div class="price">{{ product.price }}</div>
                                  <div class="stock-status {% if product.stock_quantity <= product.reorder_level %}low-stock{% else %}in-stock{% endif %}">
                                      {% if product.stock_quantity <= product.reorder_level %}
                                          Low Stock
