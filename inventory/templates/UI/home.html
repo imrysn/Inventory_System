@@ -3,24 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShelfTrack</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>ShelfTrack Dashboard</title>
+    <link rel="stylesheet" href="../../static/home.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Welcome, {{ user.username }}!</h1>
-        <a href="{% url 'logout' %}">Logout</a>
-    </header>
-    <main>
-        <h1>ShelfTrack - Inventory System</h1>
-        <h2>Categories</h2>
-        <ul>
-            {% for category in categories %}
-                <li>{{ category.name }} - {{ category.description }}</li>
-            {% endfor %}
-        </ul>
-        <a href="/products/">View Products</a><br>
-        <a href="/transactions/">View Stock Transactions</a>
-    </main>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fas fa-bars" id="burger-menu"></i>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="" class="active"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="products"><i class="fas fa-box"></i>Products</a></li>
+                <li><a href="transactions"><i class="fas fa-shopping-cart"></i>Orders</a></li>
+                <li><a href="#"><i class="fas fa-users"></i>Users</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Header -->
+        <header class="main-header">
+            <h2>ShelfTrack</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-profile">
+                <span>Welcome, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </header>
+
+        <!-- Overview Section -->
+        <section class="overview">
+            <div class="card">Revenue: +30,000</div>
+            <div class="card">Sales Return: +30,000</div>
+            <div class="card">Purchase: +30,000</div>
+            <div class="card">Income: +30,000</div>
+        </section>
+
+        <!-- Charts and Tables -->
+        <section class="charts-tables">
+            <div class="chart">
+                <h3>Revenue Chart</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart">
+                <h3>Top Selling Products</h3>
+                <canvas id="topProductsChart"></canvas>
+            </div>
+            <div class="table">
+                <h3>Stock Alert</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Quantity</th>
+                            <th>Alert Amt.</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Order ID</td>
+                            <td>Date</td>
+                            <td>Quantity</td>
+                            <td>Alert Amt.</td>
+                            <td>Status</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

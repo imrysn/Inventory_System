@@ -45,12 +45,12 @@ def register_view(request):
         # Check if passwords match
         if password != password2:
             messages.error(request, 'Passwords do not match.')
-            return render(request, 'UI/register.html')
+            return render(request, 'register.html')
         
         # Check if username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already taken.')
-            return render(request, 'UI/register.html')
+            return render(request, 'register.html')
         
         # Create the user
         user = User.objects.create_user(username=username, password=password, first_name=name)
