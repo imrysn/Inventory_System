@@ -13,7 +13,7 @@ class SupplierAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'supplier', 'price', 'stock_quantity', 'last_updated')
+    list_display = ('name', 'category', 'supplier', 'price', 'stock_quantity', 'last_updated', 'image')
     list_filter = ('category', 'supplier')
     search_fields = ('name',)
     list_editable = ('price', 'stock_quantity')

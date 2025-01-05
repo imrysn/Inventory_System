@@ -16,8 +16,8 @@
         <nav>
             <ul>
                 <li><a href="" class="active"><i class="fas fa-home"></i>Home</a></li>
-                <li><a href="products"><i class="fas fa-box"></i>Products</a></li>
-                <li><a href="transactions"><i class="fas fa-shopping-cart"></i>Orders</a></li>
+                <li><a href="#products"><i class="fas fa-box"></i>Products</a></li>
+                <li><a href="#transactions"><i class="fas fa-shopping-cart"></i>Orders</a></li>
                 <li><a href="#"><i class="fas fa-users"></i>Users</a></li>
             </ul>
         </nav>
@@ -38,7 +38,7 @@
         </header>
 
         <!-- Overview Section -->
-        <section class="overview">
+        <div class="overview" id="/">
             <div class="card">
                 <h4>Total Products</h4>
                 <i class="fas fa-boxes"></i>
@@ -63,7 +63,7 @@
                 <p class="card-value">5 Items</p>
                 <small>Items currently unavailable.</small>
             </div>
-        </section>
+        </div>
         
         
 
@@ -100,6 +100,66 @@
                     </tbody>
                 </table>
             </div>
+        </section>
+
+        <section class="products" id="products"> 
+             <!-- Product Cards by Category -->
+         <h1>Product List</h1>
+        
+         {% for category in categories %}
+             <div class="category-section">
+                 <h2 class="category-title">{{ category.name }}</h2>
+                 <div class="card-container">
+                     {% for product in category.products.all %}
+                         <div class="product-card">
+                             <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                             <div class="product-info">
+                                 <h3>{{ product.name }}</h3>
+                                 <p>{{ product.category.name }}</p>
+                                 <div class="price">{{ product.price }}</div>
+                                 <div class="stock-status {% if product.stock_quantity <= product.reorder_level %}low-stock{% else %}in-stock{% endif %}">
+                                     {% if product.stock_quantity <= product.reorder_level %}
+                                         Low Stock
+                                     {% else %}
+                                         In Stock
+                                     {% endif %}
+                                 </div>
+                             </div>
+                         </div>
+                     {% empty %}
+                         <p>No products in this category.</p>
+                     {% endfor %}
+                 </div>
+             </div>
+         {% endfor %}
+        </section>
+
+        <section class="transactions" id="transactions">
+            <h1>Stock Transactions</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Transaction Type</th>
+                <th>Quantity</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.product.name }}</td>
+                    <td>{{ transaction.get_transaction_type_display }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.date }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No transactions found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
         </section>
     </div>
 </body>

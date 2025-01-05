@@ -10,14 +10,6 @@ def home(request):
     categories = Category.objects.all()
     return render(request, 'UI/home.html', {'categories': categories})
 
-def product_list(request):
-    categories = Category.objects.all()
-    return render(request, 'UI/product_list.html', {'categories': categories})
-
-def stock_transactions(request):
-    transactions = StockTransaction.objects.all()
-    return render(request, 'UI/stock_transactions.html', {'transactions': transactions})
-
 @login_required
 def home_view(request):
     return render(request, 'home.html')
