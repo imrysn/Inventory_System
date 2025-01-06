@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
     <title>ShelfTrack Dashboard</title>
     <link rel="stylesheet" href="../../static/home.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    {% load static %}
 </head>
 <body>
     <!-- Sidebar -->
@@ -151,7 +151,6 @@
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{% static 'charts.js' %}"></script>  <!-- Linking your custom chart.js -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const sections = document.querySelectorAll('section');
@@ -181,9 +180,100 @@
 
        
         setActiveLink();
-
-        // Add event listener to update active link on scroll
         document.addEventListener('scroll', setActiveLink);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Data dynamically injected from views.py context
+        const categoryLabels = JSON.parse('{{ category_labels|safe }}'); // Converts JSON string to JavaScript array
+        const categoryData = JSON.parse('{{ category_data|safe }}'); // Converts JSON string to JavaScript array
+        const topProductNames = JSON.parse('{{ top_product_names|safe }}'); // Converts JSON string to JavaScript array
+        const topProductSales = JSON.parse('{{ top_product_sales|safe }}'); // Converts JSON string to JavaScript array
+
+        // Stock Distribution Chart
+        const ctx = document.getElementById('stockDistributionChart').getContext('2d');
+        const stockDistributionChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    label: 'Stock Distribution',
+                    data: categoryData,
+                    backgroundColor: [
+                        '#F4811F', '#008163', '#EE2526', '#fff340', '#4285F4', '#EA4335', '#FBBC05', '#34A853'
+                    ],
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                return `${label}: ${value} items`;
+                            }
+                        }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Top Products Chart
+        const topCtx = document.getElementById('topProductsChart').getContext('2d');
+        const topProductsChart = new Chart(topCtx, {
+            type: 'bar',
+            data: {
+                labels: topProductNames,
+                datasets: [{
+                    label: 'Units Sold',
+                    data: topProductSales,
+                    backgroundColor: ['#4285F4', '#EA4335', '#FBBC05', '#34A853', '#F4811F'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.label}: ${context.raw} units sold`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Products'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Units Sold'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
     });
 </script>
 </html>

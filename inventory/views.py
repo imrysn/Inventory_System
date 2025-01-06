@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F
+import json
 
 
 # Home View
@@ -35,13 +36,15 @@ def home(request):
         'out_of_stock': out_of_stock,
         'low_stock': low_stock,
         'stock_quantities': stock_quantities,
-        'category_labels': category_labels,
-        'category_data': category_data,
-        'top_product_names': top_product_names,
-        'top_product_sales': top_product_sales,
+        'category_labels': json.dumps(category_labels), 
+        'category_data': json.dumps(category_data),      
+        'top_product_names': json.dumps(top_product_names), 
+        'top_product_sales': json.dumps(top_product_sales),  
     }
 
     return render(request, 'UI/home.html', context)
+
+
 
 
 # Login View

@@ -216,9 +216,9 @@ section {
 
 .chart {
     position: relative;
-    width: 100%;
-    max-width: 550px;
-    height: 500px;
+    width: 80%;
+    max-width: 600px;
+    height: 600px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
