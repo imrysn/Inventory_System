@@ -5,18 +5,32 @@ body {
 }
 
 section {
-    height: 100vh;
+    height: auto;
     margin-top: 5%;
-    margin-bottom: 5%;
+
+}
+
+.products{
+    padding: 60px;
+    background-color: #00816373;
+    border-radius: 25px;
+}
+
+.products .category-section {
+    margin: 50px;
+    
 }
 
 .sidebar {
+    position: sticky;   
+    top: 0;
     width: 6%;
     background-color: #008163;
     color: rgb(255, 255, 255);
-    height: auto;
-    padding: 30px 60px 50px 20px;
+    height: 100vh;
+    padding: 20px 50px 10px 20px;
     text-align: center;
+    overflow-y: auto;
 }
 
 .sidebar .logo {
@@ -52,7 +66,6 @@ section {
     transition: color 0.3s ease;
 }
 
-
 .sidebar nav ul li::before {
     content: '';
     position: absolute;
@@ -85,7 +98,14 @@ section {
     color: #EE2526;;
 }
 
+.sidebar nav ul li a.active {
+    font-weight: bold;
+    color: #EE2526;
+}
 
+.sidebar nav ul li a.active i {
+    color: #f87777;
+}
 
 .main {
     flex: 1;
@@ -111,12 +131,11 @@ section {
         #EE2526 73%, 
         #EE2526 100%
     );
-    padding: 20px;
+    padding: 3px;
     color: #ffffff;
+    position: sticky;
+    top: 0;
 }
-
-
-
 
 .search-bar input {
     width: 200px;
@@ -127,6 +146,8 @@ section {
 
 .title {
     margin-left: 20px;
+    font-style: italic;
+    font-weight: 300;
 }
 
 .user-profile {
@@ -185,23 +206,12 @@ section {
     margin-bottom: 10px;
 }
 
-
-
-
 .charts-tables {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     justify-content: space-between;
     margin-top: 30px;
-}
-
-
-.table, .chart {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .chart {
@@ -218,25 +228,6 @@ section {
 .chart canvas {
     height: 300px;
     margin-top: 10px;
-}
-
-
-.table {
-    flex: 1 1 100%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-table th, table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f4f4f4;
-    text-align: left;
 }
 
 /* Products */

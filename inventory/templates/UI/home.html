@@ -6,6 +6,7 @@
     <title>ShelfTrack Dashboard</title>
     <link rel="stylesheet" href="../../static/home.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {% load static %}
 </head>
 <body>
     <!-- Sidebar -->
@@ -15,10 +16,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="" class="active"><i class="fas fa-home"></i>Home</a></li>
-                <li><a href="#products"><i class="fas fa-box"></i>Products</a></li>
-                <li><a href="#transactions"><i class="fas fa-shopping-cart"></i>Orders</a></li>
-                <li><a href="#"><i class="fas fa-users"></i>Users</a></li>
+            <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="#products"><i class="fas fa-box"></i>Products</a></li>
+            <li><a href="#transactions"><i class="fas fa-shopping-cart"></i>Orders</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i>Users</a></li>
             </ul>
         </nav>
     </aside>
@@ -27,7 +28,7 @@
     <div class="main">
         <!-- Header -->
         <header class="main-header">
-            <h2 class="title">ShelfTrack</h2>
+            <h2 class="title">7 / Evelyn Inventory Dashboard</h2>
             <div class="search-bar">
                 <input type="text" placeholder="Search...">
             </div>
@@ -37,133 +38,152 @@
             </div>
         </header>
 
-        <!-- Overview Section -->
-        <div class="overview" id="/">
-            <div class="card">
-                <h4>Total Products</h4>
-                <i class="fas fa-boxes"></i>
-                <p class="card-value">250 Items</p>
-                <small>Products currently in stock.</small>
-            </div>
-            <div class="card">
-                <h4>Pending Orders</h4>
-                <i class="fas fa-receipt"></i>
-                <p class="card-value">10 Orders</p>
-                <small>Orders waiting for approval.</small>
-            </div>
-            <div class="card">
-                <h4>Total Suppliers</h4>
-                <i class="fas fa-truck"></i>
-                <p class="card-value">8</p>
-                <small>Active suppliers providing stock.</small>
-            </div>
-            <div class="card">
-                <h4>Out of Stock</h4>
-                <i class="fas fa-exclamation-circle"></i>
-                <p class="card-value">5 Items</p>
-                <small>Items currently unavailable.</small>
-            </div>
+       <!-- Overview Section -->
+       <div class="overview" id="/">
+        <div class="card">
+            <h4>Total Products</h4>
+            <i class="fas fa-boxes"></i>
+            <p class="card-value">
+                {{ total_products }}
+            </p>
+            <small>Products currently in stock.</small>
         </div>
-        
-        
+    
+        <div class="card">
+            <h4>Pending Orders</h4>
+            <i class="fas fa-receipt"></i>
+            <p class="card-value">
+                {{ pending_orders }}
+            </p>
+            <small>Orders waiting for approval.</small>
+        </div>
+    
+        <div class="card">
+            <h4>Total Suppliers</h4>
+            <i class="fas fa-truck"></i>
+            <p class="card-value">
+                {{ total_suppliers }}
+            </p>
+            <small>Active suppliers providing stock.</small>
+        </div>
+    
+        <div class="card">
+            <h4>Out of Stock</h4>
+            <i class="fas fa-exclamation-circle"></i>
+            <p class="card-value">
+                {{ out_of_stock }}
+            </p>
+            <small>Items currently unavailable.</small>
+        </div>
+    </div>
+    
+<!-- Charts and Tables -->
+<div class="charts-tables">
+    <div class="chart">
+        <h3>Stock Distribution</h3>
+        <canvas id="stockDistributionChart"></canvas>
+    </div>
+    <div class="chart">
+        <h3>Top Selling Products</h3>
+        <canvas id="topProductsChart"></canvas>
+    </div>
+</div>
 
-        <!-- Charts and Tables -->
-        <section class="charts-tables">
-            <div class="chart">
-                <h3>Stock Distribution</h3>
-                <canvas id="stockDistributionChart"></canvas>
-            </div>
-            <div class="chart">
-                <h3>Top Selling Products</h3>
-                <canvas id="topProductsChart"></canvas>
-            </div>
-            <div class="table">
-                <h3>Stock Alert</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Date</th>
-                            <th>Quantity</th>
-                            <th>Alert Amt.</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Order ID</td>
-                            <td>Date</td>
-                            <td>Quantity</td>
-                            <td>Alert Amt.</td>
-                            <td>Status</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+        <section class="products" id="products">
+            <h1>Product List</h1>
+            {% for category in categories %}
+                <div class="category-section">
+                    <h2 class="category-title">{{ category.name }}</h2>
+                    <div class="card-container">
+                        {% for product in category.products.all %}
+                            <div class="product-card">
+                                <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                                <div class="product-info">
+                                    <h3>{{ product.name }}</h3>
+                                    <p>{{ product.category.name }}</p>
+                                    <div class="price">{{ product.price }}</div>
+                                    <div class="stock-status {% if product.stock_quantity <= product.reorder_level %}low-stock{% else %}in-stock{% endif %}">
+                                        {% if product.stock_quantity <= product.reorder_level %}
+                                            Low Stock
+                                        {% else %}
+                                            In Stock
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p>No products in this category.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
         </section>
 
-        <section class="products" id="products"> 
-             <!-- Product Cards by Category -->
-         <h1>Product List</h1>
-        
-         {% for category in categories %}
-             <div class="category-section">
-                 <h2 class="category-title">{{ category.name }}</h2>
-                 <div class="card-container">
-                     {% for product in category.products.all %}
-                         <div class="product-card">
-                             <img src="{{ product.image_url }}" alt="{{ product.name }}">
-                             <div class="product-info">
-                                 <h3>{{ product.name }}</h3>
-                                 <p>{{ product.category.name }}</p>
-                                 <div class="price">{{ product.price }}</div>
-                                 <div class="stock-status {% if product.stock_quantity <= product.reorder_level %}low-stock{% else %}in-stock{% endif %}">
-                                     {% if product.stock_quantity <= product.reorder_level %}
-                                         Low Stock
-                                     {% else %}
-                                         In Stock
-                                     {% endif %}
-                                 </div>
-                             </div>
-                         </div>
-                     {% empty %}
-                         <p>No products in this category.</p>
-                     {% endfor %}
-                 </div>
-             </div>
-         {% endfor %}
-        </section>
 
         <section class="transactions" id="transactions">
             <h1>Stock Transactions</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Transaction Type</th>
-                <th>Quantity</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for transaction in transactions %}
-                <tr>
-                    <td>{{ transaction.product.name }}</td>
-                    <td>{{ transaction.get_transaction_type_display }}</td>
-                    <td>{{ transaction.quantity }}</td>
-                    <td>{{ transaction.date }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4">No transactions found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Transaction Type</th>
+                        <th>Quantity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.product.name }}</td>
+                            <td>{{ transaction.get_transaction_type_display }}</td>
+                            <td>{{ transaction.quantity }}</td>
+                            <td>{{ transaction.date }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No transactions found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </section>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../../static/charts.js"></script>
+<script src="{% static 'charts.js' %}"></script>  <!-- Linking your custom chart.js -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('section');
+        const links = document.querySelectorAll('.sidebar nav ul li a');
+        
+        function setActiveLink() {
+            let currentSection = '';
 
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                
+                if (window.scrollY >= sectionTop - 50 && window.scrollY < sectionTop + sectionHeight - 50) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            
+            links.forEach(link => {
+                link.classList.remove('active'); 
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active'); 
+                }
+            });
+        }
+
+       
+        setActiveLink();
+
+        // Add event listener to update active link on scroll
+        document.addEventListener('scroll', setActiveLink);
+    });
+</script>
 </html>
