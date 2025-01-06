@@ -8,11 +8,11 @@ body {
 
 section {
     max-width: 500px;
-    margin: 50px auto;
+    margin: 130px auto;
     padding: 20px;
     background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px  2px 6px rgba(3, 100, 60, 0.699);
 }
 
 h1 {
@@ -29,9 +29,8 @@ form {
 }
 
 form input,
-form select,
-form textarea {
-    width: 100%;
+form select{
+    width: 50%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -41,18 +40,17 @@ form textarea {
 }
 
 form input:focus,
-form select:focus,
-form textarea:focus {
-    border-color: #007bff;
+form select:focus{
+    border-color: #008163;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 5px rgba(1, 75, 52, 0.5);
 }
 
 button {
     padding: 12px 20px;
     font-size: 16px;
     font-weight: bold;
-    background: #007bff;
+    background: #008163;
     color: white;
     border: none;
     border-radius: 5px;
@@ -61,12 +59,14 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #f8f9fa;
+    color: #000;
     transform: translateY(-2px);
+    border: 1px solid #008163;
 }
 
 button:active {
-    background-color: #003f7f;
+    background-color: #008163;
     transform: translateY(0);
 }
 
