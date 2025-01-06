@@ -84,7 +84,7 @@
         <canvas id="stockDistributionChart"></canvas>
     </div>
     <div class="chart">
-        <h3>Top Selling Products</h3>
+        <h3>Product Quantity</h3>
         <canvas id="topProductsChart"></canvas>
     </div>
 </div>
@@ -92,6 +92,9 @@
 
 <section class="products" id="products">
     <h1>Product List</h1>
+    <div class="add-product">
+        <a href="{% url 'add_product' %}" class="add-btn">Add   Product</a>
+    </div>
     {% for category in categories %}
         <div class="category-section">
             <h2 class="category-title">{{ category.name }}</h2>
@@ -274,7 +277,7 @@
                     y: {
                         title: {
                             display: true,
-                            text: 'Units Sold'
+                            text: 'No. of Items'
                         },
                         beginAtZero: true
                     }

@@ -10,12 +10,6 @@ section {
 
 }
 
-.products{
-    padding: 60px;
-    background-color: #00816373;
-    border-radius: 25px;
-}
-
 .products .category-section {
     margin: 50px;
     
@@ -230,6 +224,19 @@ section {
 }
 
 /* Products */
+
+.products{
+    padding: 60px;
+    background-color: #F4F6F8;
+    border-radius: 25px;
+}
+
+.products h1 {
+    text-align: center;
+    color: #000;
+    font-size: 28 px;
+}
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -288,6 +295,28 @@ section {
     color: #007BFF;
 }
 
+.add-product {
+    margin-left: 90%;
+    text-align: center;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    background-color: #008163;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;    
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #F4F6F8;
+    color: #000;
+    border: 1px solid #008163;
+}
+
+
 .product-actions {
     display: flex;
     justify-content: space-between;
@@ -314,7 +343,7 @@ section {
 .product-actions .edit-btn:hover {
     background-color: #008163;
     color: #fff;
-    border-color: #000;
+    border-color: #fff;
 }
 
 .product-actions .delete-btn {
@@ -326,7 +355,7 @@ section {
 .product-actions .delete-btn:hover {
     background-color: #e53935;
     color: #fff;
-    border-color: #000;
+    border-color: #fff;
 }
 
 

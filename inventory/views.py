@@ -99,7 +99,7 @@ def add_product(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('product_list')  # Redirect to product list view
+            return redirect('home')
     else:
         form = ProductForm()
     return render(request, 'UI/add_product.html', {'form': form})
@@ -111,7 +111,7 @@ def edit_product(request, product_id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Redirect to product list view
+            return redirect('home')
     else:
         form = ProductForm(instance=product)
     return render(request, 'UI/edit_product.html', {'form': form, 'product': product})
@@ -120,4 +120,4 @@ def edit_product(request, product_id):
 def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
-    return redirect('home')  # Redirect to product list view
+    return redirect('home')

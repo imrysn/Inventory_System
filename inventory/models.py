@@ -25,7 +25,6 @@ class Product(models.Model):
     reorder_level = models.PositiveIntegerField(default=10) 
     last_updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='product_images/', default='default.jpg')
-    description = models.TextField(blank=True, null=True)  # New field for product description
 
     @property
     def image_url(self):
