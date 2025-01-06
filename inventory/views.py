@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from .models import Category, Product, Supplier, StockTransaction
+from django.shortcuts import render, redirect, get_object_or_404, redirect
+from .models import Category, Product, Supplier
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F
+from .forms import ProductForm
 import json
 
 
@@ -92,3 +93,31 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'You have been logged out.')
     return redirect('login')
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # Redirect to product list view
+    else:
+        form = ProductForm()
+    return render(request, 'UI/add_product.html', {'form': form})
+
+# Edit Product
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirect to product list view
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'UI/edit_product.html', {'form': form, 'product': product})
+
+# Delete Product
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    return redirect('home')  # Redirect to product list view

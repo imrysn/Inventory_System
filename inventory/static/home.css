@@ -215,10 +215,9 @@ section {
 }
 
 .chart {
-    position: relative;
     width: 80%;
-    max-width: 600px;
-    height: 600px;
+    max-width: 550px;
+    height: 550px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -288,6 +287,48 @@ section {
     text-decoration: none;
     color: #007BFF;
 }
+
+.product-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.product-actions .edit-btn,
+.product-actions .delete-btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.product-actions .edit-btn {
+    background-color: #fff; 
+    color: #000;
+    border: 1px solid #008163;
+}
+
+.product-actions .edit-btn:hover {
+    background-color: #008163;
+    color: #fff;
+    border-color: #000;
+}
+
+.product-actions .delete-btn {
+    background-color: #fff; /* Red for Delete */
+    color: #000;
+    border: 1px solid #f44336;
+}
+
+.product-actions .delete-btn:hover {
+    background-color: #e53935;
+    color: #fff;
+    border-color: #000;
+}
+
 
 /* Mobile View */
 @media screen and (max-width: 768px) {
