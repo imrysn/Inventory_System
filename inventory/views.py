@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F
 from .forms import ProductForm
+from django.contrib.auth.models import User
 import json
 
 
@@ -44,9 +45,6 @@ def home(request):
     }
 
     return render(request, 'UI/home.html', context)
-
-
-
 
 # Login View
 def login_view(request):
@@ -121,3 +119,7 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     return redirect('home')
+
+def user_list(request):
+    users = User.objects.all()  # Retrieve all users from the database
+    return render(request, 'UI/home.html', {'users': users})

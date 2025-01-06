@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -35,21 +36,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-
-
-class StockTransaction(models.Model):
-    TRANSACTION_TYPES = [
-        ('IN', 'Stock In'),
-        ('OUT', 'Stock Out'),
-    ]
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='transactions')
-    transaction_type = models.CharField(max_length=3, choices=TRANSACTION_TYPES)
-    quantity = models.PositiveIntegerField()
-    date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.get_transaction_type_display()} - {self.product.name}"
-
 class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -63,4 +49,3 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.get_status_display()}"
-
