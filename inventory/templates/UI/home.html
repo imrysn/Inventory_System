@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShelfTrack Dashboard</title>
+    <title>Inventory System</title>
     <link rel="stylesheet" href="../../static/home.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="logo">
-            <i class="fas fa-bars" id="burger-menu"></i>
-        </div>
         <nav>
             <ul>
             <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
@@ -26,10 +23,7 @@
     <div class="main">
         <!-- Header -->
         <header class="main-header">
-            <h2 class="title">7 / Evelyn Inventory Dashboard</h2>
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-            </div>
+            <h2 class="title">Inventory Management Dashboard</h2>
             <div class="user-profile">
                 <span>Welcome, {{ user.username }}!</span>
                 <a href="{% url 'logout' %}">Logout</a>

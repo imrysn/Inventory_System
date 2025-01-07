@@ -15,8 +15,9 @@ section {
     
 }
 
+/* Sidebar */
 .sidebar {
-    position: sticky;   
+    position: sticky;
     top: 0;
     width: 6%;
     background-color: #008163;
@@ -25,24 +26,7 @@ section {
     padding: 20px 50px 10px 20px;
     text-align: center;
     overflow-y: auto;
-}
-
-.sidebar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 30px;
-    display: none;
-}
-
-.sidebar .logo i {
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.sidebar .logo i:hover {
-    color: #2ECC71;
+    z-index: 1000;
 }
 
 .sidebar nav ul li {
@@ -101,12 +85,14 @@ section {
     color: #f87777;
 }
 
+/* Main Content */
 .main {
     flex: 1;
     padding: 10px 40px 10px 40px;
     background-color: #F4F6F8;
 }
 
+/* Header */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -131,11 +117,21 @@ section {
     top: 0;
 }
 
-.search-bar input {
-    width: 200px;
-    padding: 8px;
-    border: none;
+.main .logo {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
+.main .logo i {
+    font-size: 24px;
     color: #fff;
+    cursor: pointer;
+}
+
+.main .logo i:hover {
+    color: #2ECC71;
 }
 
 .title {
@@ -296,7 +292,6 @@ section {
 }
 
 .add-product {
-    margin-left: 90%;
     text-align: center;
 }
 
@@ -358,120 +353,97 @@ section {
     border-color: #fff;
 }
 
-.users {
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.users h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.users table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-.users p {
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-/* Mobile View */
-@media screen and (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
-
+/* Sidebar (Mobile View) */
+@media (max-width: 768px) {
     .sidebar {
-        width: 100%;
-        height: auto;
-        padding: 10px;
-        text-align: center;
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hidden by default */
+        width: 10%;
+        max-width: 250px;
+        background-color: #00816370;
+        transition: transform 0.3s ease-in-out;
+        padding: -20px;
     }
 
-    .sidebar.active {
-        background-color: #f4f4f4;
-    }
-
-    .sidebar .logo {
+    .main .logo {
         display: block;
-    }
-
-    .sidebar nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .sidebar nav ul li {
-        margin: 0;
-    }
-
-    .sidebar nav ul li a {
-        padding: 10px;
-        background-color: #34495E;
-        border-radius: 5px;
-        display: inline-block;
-    }
-
-    .main {
-        padding: 10px;
+        margin-left: 90% !important;
+        margin-top: 5px !important;
     }
 
     .main-header {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .search-bar input {
-        width: 100%;
+    .main {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 16px !important;
+        padding-top: 30px;
+    }
+
+    .user-profile {
+        font-size: 16px;
+    }
+    .user-profile a {
+        margin-left: 60px !important;
     }
 
     .overview {
         grid-template-columns: 1fr;
-        gap: 10px;
     }
 
     .charts-tables {
         grid-template-columns: 1fr;
+        margin-left: 0;
+    }
+
+    .products {
+        padding: 10px;
+    }
+    .products .category-section {
+        justify-content: center;
+        margin-left: -5px;
+    }
+
+    .products h1 {
+        font-size: 28px;
+    }
+
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 10px;
     }
 
-    .card, .chart, .table {
-        padding: 15px;
-        font-size: 14px;
+    .product-card {
+        width: 100%;
+        margin: 0;
     }
 
-    table th, table td {
-        font-size: 12px;
-        padding: 5px;
+    .product-actions {
+        flex-direction: column;
     }
 
-    table {
-        overflow-x: auto;
-        display: block;
+    .product-actions .edit-btn,
+    .product-actions .delete-btn {
+        width: 90%;
+        margin: 5px 0;
+    }
+    .products .category-title {
+        margin-left: 10px;
+    }
+    .charts-tables {
+        margin-left: 50px;
+    }
+    .chart {
+        margin-bottom: 10px;
+        height: 80%;
     }
 }
