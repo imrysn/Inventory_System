@@ -119,7 +119,3 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     return redirect('home')
-
-def user_list(request):
-    users = User.objects.all()  # Retrieve all users from the database
-    return render(request, 'UI/home.html', {'users': users})
