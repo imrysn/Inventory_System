@@ -36,16 +36,3 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Order(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('shipped', 'Shipped'),
-    ]
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
-    quantity = models.PositiveIntegerField()
-    order_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.product.name} - {self.get_status_display()}"
