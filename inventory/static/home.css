@@ -353,6 +353,38 @@ section {
     border-color: #fff;
 }
 
+/* Footer Styles */
+.footer {
+    background-color: #008163;
+    color: #fff;
+    padding: 10px 350px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1 1 300px;
+    margin: 10px 0;
+}
+
+.footer-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.footer-section p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
 /* Sidebar (Mobile View) */
 @media (max-width: 768px) {
     .sidebar {
@@ -445,5 +477,11 @@ section {
     .chart {
         margin-bottom: 10px;
         height: 80%;
+    }
+    .footer {
+        padding: 10px 20px;
+    }
+    .footer-section {
+        justify-content: center;
     }
 }
